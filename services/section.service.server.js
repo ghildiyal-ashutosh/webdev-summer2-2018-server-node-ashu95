@@ -49,9 +49,7 @@ module.exports = app => {
 
 
 
-
-
-    unenrollSection = (req, res) => {
+            unenrollSection = (req, res) => {
 
                 const sectionId = req.params['sectionId']
                 const enrollment2 = {
@@ -88,7 +86,7 @@ module.exports = app => {
     findSectionById = (req, res) => {
         sectionModel
             .findSectionById(req.params.sectionId)
-            .then(section => res.json(section))
+            .then(section => res.send(section))
     }
 
     findSectionForStudent = (req, res) => {
@@ -113,10 +111,13 @@ module.exports = app => {
     app.put('/api/section/:sectionId', updateSection);
 
     app.get('/api/course/:courseId/section', findSectionForCourse );
+    app.get('/api/section/:sectionId', findSectionById);
 
     app.get('/api/findAllSections', findAllSections);
-    app.put('/api/section/enroll/:sectionId', enrollSection);
-    app.delete('/api/section/unenroll/:sectionId', unenrollSection);
+    app.put('/api/student/enroll/section/:sectionId', enrollSection);
+    app.delete('/api/student/unenroll/section/:sectionId', unenrollSection);
     app.get('/api/student/section', findSectionForStudent);
+
+
 };
 
