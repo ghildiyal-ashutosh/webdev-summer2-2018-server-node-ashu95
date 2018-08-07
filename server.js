@@ -2,11 +2,24 @@ var express = require('express')
 var app = express()
 var session = require('express-session')
 
+
+// cross origin call (CORS)
+app.use(function (req,res,next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    next();
+});
+
+
+
 app.use(session({
     resave: false,
     saveUninitialized : true,
     secret: 'any string'
 }));
+
+
 
 
 
@@ -29,6 +42,13 @@ function getSession(req,res)  {
     
 }
 
+function logIn(req,res)
+{
+    res.send("success");
+}
+
+
+app.post('/login', logIn);
 app.get('/api/session/set/:name/:value', setSession);
 app.get('/api/session/get/:name', getSession);
 
