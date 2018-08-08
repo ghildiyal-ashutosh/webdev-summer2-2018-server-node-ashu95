@@ -1,18 +1,21 @@
 module.exports = app => {
 
-    createSection = (req,res) => {
+    const sectionModel = require('../models/sections/section.model.server')
 
-        console.log(req.body);
-        res.send(req.body);
+    createSection = (req,res) => {
+        sectionModel
+             .createSection(req.body)
+             .then(section => res.send(section));
 
     }
 
     findSectionForCourse = (req,res) => {
-        var courseId = req.courseId;
-        console.log(courseId);
-        res.send(courseId);
-    }
+           var courseId = req.params['courseId']
+        sectionModel
+            .findSectionForCourse(courseId)
+            .then(sections => res.send(sections));
 
+    }
     app.post('/api/section', createSection);
-    app.get('/api/section/:courseId', findSectionForCourse )
+    app.get('/api/course/:courseId/section', findSectionForCourse );
 }
