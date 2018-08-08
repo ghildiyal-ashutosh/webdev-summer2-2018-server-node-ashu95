@@ -26,6 +26,7 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://127.0.0.1/webdev2_summer2018');
 
 require('./services/user.service.server')(app);
+require('./services/section.service.server')(app);
 
 
 
