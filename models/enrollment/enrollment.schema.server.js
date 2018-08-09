@@ -2,8 +2,14 @@ const mongoose = require('mongoose');
 
 
 module.exports = mongoose.Schema ({
-    username: String,
-    firstName: String,
-    lastName : String,
-    password: String
-}, {collection:'user'});
+    sections : {
+        type: mongoose.Schema.Types.ObjectId, ref: 'SectionModel'
+    },
+
+    student : {
+        type :  mongoose.Schema.Types.ObjectId, ref : 'UserModel'
+    },
+
+    score : Number
+
+}, {collection:'enrollment'});
