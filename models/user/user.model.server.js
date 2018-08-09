@@ -12,9 +12,35 @@ const userModel = mongoose.model('UserModel', userSchema);
      userModel.findOne({username: username, password:password});
 
 
+findUserById = userId =>
+    userModel.findById(userId);
+
+createUser = (user) =>
+    userModel.create(user);
+
+
+updateUser = (user) =>
+
+userModel.update({
+    _id: user.id
+},{
+    username:  user.username,
+    firstName: user.firstName,
+    lastName:  user.lastName,
+    email: user.email,
+    contact: user.contact
+});
+
+
+
+
+
 
 
 module.exports = {
     findAllUsers,
-    findUserByCredentials
+    findUserByCredentials,
+    findUserById,
+    updateUser,
+    createUser
 };
