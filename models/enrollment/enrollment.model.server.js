@@ -3,13 +3,15 @@ const mongoose = require('mongoose');
 const enrollmentSchema = require('./enrollment.schema.server');
 
 const enrollmentModel = mongoose.model("EnrollmentModel", enrollmentSchema)
+const sectionModel = require("../sections/section.model.server");
 
 
 findSectionsForStudent = (studentId) =>
     enrollmentModel
-         .find({student : studentId})
-         .populate ('section')
-         .exec();
+       .find({student: studentId})
+        .populate('section')
+        .exec();
+
 
 enrollStudentSection = (enrollment) =>
     enrollmentModel.create(enrollment);

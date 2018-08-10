@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 module.exports = mongoose.Schema ({
-    sections : {
+    section : {
         type: mongoose.Schema.Types.ObjectId, ref: 'SectionModel'
     },
 
@@ -10,6 +10,6 @@ module.exports = mongoose.Schema ({
         type :  mongoose.Schema.Types.ObjectId, ref : 'UserModel'
     },
 
-    score : Number
+    scores : Number
 
-}, {collection:'enrollment'});
+    }, {collection:'enrollment'});
