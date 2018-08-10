@@ -2,63 +2,80 @@ module.exports = app => {
 
     const userModel = require('../models/user/user.model.server');
 
-    findAllUsers = (req,res) =>
+    findAllUsers = (req, res) =>
         userModel.findAllUsers()
             .then(users => {
                 res.send(users);
             });
 
-    login = (req,res) => {
-        const  user = req.body;
+    login = (req, res) => {
+        const user = req.body;
 
         userModel.findUserByCredentials(user.username, user.password)
             .then(user => {
-                req.session['currentUser'] = user;
-                res.send(req.session);
-            });
-    };
+                if (user === null) {
+                    res.send({_id: 0})
+                }
+                else {
 
-    currentUser = (req,res) => {
+                    req.session['currentUser'] = user;
+                    res.send(user);
+                }
+            });
+    }
+
+    currentUser = (req, res) => {
         res.send(req.session['currentUser']);
     }
 
-    logOut = (req,res) => {
-        let user = {username:'Negative', password:''};
-        req.session['currentUser'] = user;
-        res.send(req.session);
+    logOut = (req, res) => {
+        req.session.destroy();
+        res.send(200);
 
     }
 
-    registerUser = (req,res) =>
+    registerUser = (req, res) =>
         userModel.createUser(req.body)
             .then(function (user) {
                 req.session['currentUser'] = user;
-                req.send(user);
+                res.send(user);
 
             })
 
 
-    findUserByUsername = (req,res) =>
-        userModel.findUserByCredentials(req.body)
-            .then(user => res.json(user));
+    findUserByUsername = (req, res) =>
+
+    userModel.findByUsername(req.params.username)
+        .then(user => {
+                if (user == null) {
+                    res.json({_id: 0})
+                }
+                else {
+                    res.json(user);
+                }
+            });
+
 
     updateProfile = (req,res) =>
 
-        userModel.updateUser(req.body)
-            .then (function(){
-                req.session['currentUser'] = user;
-                res.send(user);
-            })
+        userModel.updateUser(req.body, req.body._id)
+            .then (function(user){
+                if (user !== null)
+                {
+                    req.session['currentUser'] = user;
+                    res.send(user);
+                }
+                else
+                    res.send({_id : -1})
 
-    function deleteProfile (req,res) {
-        req.session.destroy();
-        res.send(200);
-    }
+            });
+
+    deleteProfile = (req,res) =>
+        userModel.deleteUser(req.session.currentUser._id);
 
 
 
-
-    findUserById = (req,res) =>
+        findUserById = (req,res) =>
         userModel.findUserById(req.params.userId)
             .then(user => res.json(user));
 
@@ -66,10 +83,15 @@ module.exports = app => {
         res.send(req.session['currentUser']);
 
 
-        app.get('/currentUser', currentUser);
+        app.get('/api/profile', currentUser);
         app.get('/api/user', findAllUsers);
-        app.post('/login', login);
-       app.post('/logout', logOut);
+        app.post('/api/login', login);
+       app.post('/api/logout', logOut);
+       app.post('/api/register', registerUser);
+       app.put('/api/profile', updateProfile);
+       app.delete('/api/profile', deleteProfile);
+       app.get('/api/username/:username', findUserByUsername);
+
 
 };
 

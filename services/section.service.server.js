@@ -2,6 +2,8 @@ module.exports = app => {
 
     const sectionModel = require('../models/sections/section.model.server')
     const enrollmentModel = require('../models/enrollment/enrollment.model.server')
+    const JSON = require('circular-json');
+
 
     createSection = (req, res) => {
         sectionModel
@@ -14,7 +16,7 @@ module.exports = app => {
         const courseId = req.params['courseId']
         sectionModel
             .findSectionForCourse(courseId)
-            .then(sections => res.send(sections));
+            .then((sections) => res.send(sections));
 
     }
 
@@ -34,14 +36,16 @@ module.exports = app => {
         };
 
         sectionModel
-            .decreaseSectionSeats(sectionId)
+            .decreaseSectionSeats(sectionId1)
             .then(function () {
                 return enrollmentModel
                     .enrollStudentSection(enrollment1)
             }).then(function (enrollment) {
-            res.json(enrollment);
+            res.send(enrollment);
 
         });
+
+        console.log(enrollment1);
     }
 
 
@@ -55,9 +59,9 @@ module.exports = app => {
             .increaseSectionSeats(sectionId)
             .then(function () {
                 return enrollmentModel
-                    .enrollStudentSection(enrollment2)
+                    .unenrollStudentSection(enrollment2)
             }).then(function (enrollment) {
-            res.json(enrollment);
+            res.send(enrollment);
 
         })
     }
@@ -84,14 +88,17 @@ module.exports = app => {
 
     findSectionForStudent = (req, res) => {
         enrollmentModel
-            .findSectionsForStudent(req.session['currentUser']._id)
-            .then(enrollments => res.json(enrollments))
-    }
+                .findSectionsForStudent(req.session['currentUser']._id)
+                .then((enrollment) => res.json(enrollment));
+        }
+
+
+
 
     updateSection = (req, res) => {
         sectionModel
             .updateSection(req.body)
-            .then(section => res.json(section))
+            .then(section => res.send(section))
     }
 
 
@@ -101,8 +108,10 @@ module.exports = app => {
     app.put('/api/section/:sectionId', updateSection);
 
     app.get('/api/course/:courseId/section', findSectionForCourse );
+
     app.get('/api/findAllSections', findAllSections);
     app.put('/api/section/enroll/:sectionId', enrollSection);
     app.delete('/api/section/unenroll/:sectionId', unenrollSection);
     app.get('/api/student/section', findSectionForStudent);
 };
+
