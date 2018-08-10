@@ -18,11 +18,14 @@ findUserById = userId =>
 createUser = (user) =>
     userModel.create(user);
 
+deleteUser = (userId) =>
+    userModel.remove({_id : userId})
 
-updateUser = (user) =>
+
+updateUser = (user,userId) =>
 
 userModel.update({
-    _id: user.id
+    _id: userId
 },{
     username:  user.username,
     firstName: user.firstName,
@@ -30,6 +33,9 @@ userModel.update({
     email: user.email,
     contact: user.contact
 });
+
+findByUsername = (username) =>
+         userModel.findOne({username: username});
 
 
 
@@ -42,5 +48,7 @@ module.exports = {
     findUserByCredentials,
     findUserById,
     updateUser,
-    createUser
+    createUser,
+    deleteUser,
+    findByUsername
 };

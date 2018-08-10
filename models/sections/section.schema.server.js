@@ -4,4 +4,5 @@ module.exports = mongoose.Schema ({
     courseId : String,
     maxSeats: Number,
     remSeats:Number,
+    students: [String]
 },{collection:'section'});
