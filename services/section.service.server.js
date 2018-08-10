@@ -30,41 +30,61 @@ module.exports = app => {
 
     enrollSection = (req, res) => {
         var sectionId1 = req.params['sectionId'];
-        var enrollment1 = {
-            student: req.session.currentUser._id,
-            section: sectionId1
-        };
 
-        sectionModel
-            .decreaseSectionSeats(sectionId1)
-            .then(function () {
-                return enrollmentModel
-                    .enrollStudentSection(enrollment1)
-            }).then(function (enrollment) {
-            res.send(enrollment);
+        sectionModel.
+        findSectionById(sectionId1).then((section) => {
 
-        });
+            if(section.remSeats < section.maxSeats) {
 
-        console.log(enrollment1);
+
+                var enrollment1 = {
+                    student: req.session.currentUser._id,
+                    section: sectionId1
+                };
+
+                sectionModel
+                    .decreaseSectionSeats(sectionId1)
+                    .then(function () {
+                        return enrollmentModel
+                            .enrollStudentSection(enrollment1)
+                    }).then(function (enrollment) {
+                    res.send(enrollment);
+
+                });
+            }
+
+            else
+                res.send ({_id : -1})
+
+        })
     }
 
 
     unenrollSection = (req, res) => {
-        const sectionId = req.params['sectionId']
-        const enrollment2 = {
-            student: req.session.currentUser._id,
-            section: sectionId
-        }
-        sectionModel
-            .increaseSectionSeats(sectionId)
-            .then(function () {
-                return enrollmentModel
-                    .unenrollStudentSection(enrollment2)
-            }).then(function (enrollment) {
-            res.send(enrollment);
+        sectionModel.
+        findSectionById(req.params.sectionId).then((section) => {
 
-        })
-    }
+            if (section.remSeats > 0) {
+
+
+                const sectionId = req.params['sectionId']
+                const enrollment2 = {
+                    student: req.session.currentUser._id,
+                    section: sectionId
+                }
+                sectionModel
+                    .increaseSectionSeats(sectionId)
+                    .then(function () {
+                        return enrollmentModel
+                            .unenrollStudentSection(enrollment2)
+                    }).then(function (enrollment) {
+                    res.send(enrollment);
+
+                })
+            }
+            else
+                res.send({_id: -1})
+        })};
 
     deleteSection = (req, res) => {
         const enrollment = {
