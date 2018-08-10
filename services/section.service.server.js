@@ -31,13 +31,7 @@ module.exports = app => {
     enrollSection = (req, res) => {
         var sectionId1 = req.params['sectionId'];
 
-        sectionModel.
-        findSectionById(sectionId1).then((section) => {
-
-            if(section.remSeats < section.maxSeats) {
-
-
-                var enrollment1 = {
+        var enrollment1 = {
                     student: req.session.currentUser._id,
                     section: sectionId1
                 };
@@ -53,19 +47,11 @@ module.exports = app => {
                 });
             }
 
-            else
-                res.send ({_id : -1})
 
-        })
-    }
+
 
 
     unenrollSection = (req, res) => {
-        sectionModel.
-        findSectionById(req.params.sectionId).then((section) => {
-
-            if (section.remSeats > 0) {
-
 
                 const sectionId = req.params['sectionId']
                 const enrollment2 = {
@@ -82,9 +68,8 @@ module.exports = app => {
 
                 })
             }
-            else
-                res.send({_id: -1})
-        })};
+
+
 
     deleteSection = (req, res) => {
         const enrollment = {
