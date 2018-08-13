@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5acb9109-c097-4023-986e-505b9427bdfe" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/models/question/question.model.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/question/question.schema.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/quiz/quiz.model.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/quiz/quiz.schema.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/question.service.server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/quiz.service.server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/question/question.schema.server.js" beforeDir="false" afterPath="$PROJECT_DIR$/models/question/question.schema.server.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -50,16 +43,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="question.schema.server.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="question.schema.server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/models/question/question.schema.server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
+            <state relative-caret-position="90">
+              <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="quiz.schema.server.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="quiz.schema.server.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/models/quiz/quiz.schema.server.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
@@ -73,6 +66,15 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
               <caret line="16" column="53" selection-start-line="16" selection-start-column="53" selection-end-line="16" selection-end-column="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="section.schema.server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/models/sections/section.schema.server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -137,13 +139,13 @@
         <option value="$PROJECT_DIR$/services/user.service.server.js" />
         <option value="$PROJECT_DIR$/models/sections/section.model.server.js" />
         <option value="$PROJECT_DIR$/services/section.service.server.js" />
-        <option value="$PROJECT_DIR$/models/question/question.schema.server.js" />
         <option value="$PROJECT_DIR$/models/question/question.model.server.js" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/models/quiz/quiz.schema.server.js" />
         <option value="$PROJECT_DIR$/models/quiz/quiz.model.server.js" />
         <option value="$PROJECT_DIR$/services/quiz.service.server.js" />
         <option value="$PROJECT_DIR$/services/question.service.server.js" />
+        <option value="$PROJECT_DIR$/models/question/question.schema.server.js" />
       </list>
     </option>
   </component>
@@ -161,11 +163,11 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="155" />
-    <option name="y" value="60" />
+    <option name="y" value="88" />
     <option name="width" value="748" />
-    <option name="height" value="708" />
+    <option name="height" value="680" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -255,22 +257,23 @@
       <workItem from="1533590286471" duration="112201000" />
       <workItem from="1533585450905" duration="7616000" />
       <workItem from="1534028366032" duration="7301000" />
-      <workItem from="1534063706518" duration="22493000" />
+      <workItem from="1534063706518" duration="25162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150544000" />
+    <option name="totallyTimeSpent" value="153213000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1301" height="772" extended-state="6" />
+    <frame x="155" y="88" width="748" height="680" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32237872" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13655172" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.12441315" side_tool="true" weight="0.24804991" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.87558687" visible="true" weight="0.43681747" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.87558687" visible="true" weight="0.5100182" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -543,13 +546,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/sections/section.schema.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/enrollment/enrollment.model.server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -627,13 +623,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/models/question/question.schema.server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/models/quiz/quiz.model.server.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="284">
@@ -645,6 +634,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/sections/section.schema.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="22" lean-forward="true" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/models/question/question.schema.server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="25" selection-start-line="6" selection-start-column="25" selection-end-line="6" selection-end-column="25" />
         </state>
       </provider>
     </entry>
