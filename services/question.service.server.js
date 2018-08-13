@@ -21,9 +21,14 @@ module.exports = app => {
                          error => res.send(error)
                      )
 
+    deleteOuestion = (req,res) =>
+        questionModel.deleteQuestion(req.params.questionId)
+            .then((response) => res.send(response));
+
          app.post('/api/question', createQuestion);
          app.get('/api/question/:questionId', findQuestionById);
          app.get('/api/question', findAllQuestions);
+         app.delete('/api/question/:questionId', deleteOuestion);
 
 
 }

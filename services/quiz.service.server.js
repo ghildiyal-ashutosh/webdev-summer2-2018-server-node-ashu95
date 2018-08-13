@@ -37,11 +37,23 @@ module.exports = app => {
             )
     }
 
+    deleteQuestion = (req,res) => {
+        quizModel.deleteQuestion(req.params.quizId, req.params.questionId)
+            .then(
+                status => res.send(status),
+                error => res.send(error)
+            )
+    }
+
+
+
     app.post('/api/quiz', createQuiz);
     app.get('/api/quiz', findAllQuizzes);
     app.get('/api/quiz/:quizId', findQuizById);
     app.delete('/api/quiz/:quizId', deleteQuiz);
     app.put('api/quiz/:quizId', updateQuiz);
     app.put('/api/quiz/:quizId/question/:questionId', addQuestion);
+    app.delete('/api/quiz/:quizId/question/:questionId', deleteQuestion);
+
 
 }

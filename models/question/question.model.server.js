@@ -13,6 +13,9 @@ findAllQuestions = () =>
 findQuestionById = (questionId) =>
     questionModel.findOne({_id: questionId});
 
+deleteQuestion = (questionId) =>
+    questionModel.deleteOne({_id: questionId});
+
 module.exports = {
-    createQuestion,findAllQuestions, findQuestionById
+    createQuestion,findAllQuestions, findQuestionById, deleteQuestion
 };

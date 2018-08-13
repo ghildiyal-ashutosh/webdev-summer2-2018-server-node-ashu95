@@ -5,6 +5,8 @@ module.exports = mongoose.Schema ({
     points: Number,
     description: String,
     questionText: String,
+    true: Boolean,
+    blanks : [],
     choices : [{
         text: String,
         value: String,
