@@ -6,6 +6,8 @@ module.exports = mongoose.Schema ({
     description: String,
     questionText: String,
     true: Boolean,
+    essayLength: Number,
+    score:Number,
     blanks : [],
     choices : [{
         text: String,

@@ -12,7 +12,7 @@ module.exports = mongoose.Schema ({
     },
     answers: [{
         essayAnswer: String,
-        fillBlankAnswer: {
+        fillBlankAnswers: {
             variable: String,
             value:String
         },
@@ -22,5 +22,6 @@ module.exports = mongoose.Schema ({
             type: mongoose.Schema.Types.ObjectId, ref:'QuestionModel'
         }
     }],
-    score: Number
+    score: Number,
+    total: Number
 },{collection: 'submission'});
