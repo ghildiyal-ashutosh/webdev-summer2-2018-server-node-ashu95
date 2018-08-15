@@ -12,16 +12,15 @@ module.exports = mongoose.Schema ({
     },
     answers: [{
         essayAnswer: String,
-        fillBlankAnswers: {
-            variable: String,
-            value:String
-        },
+        fillBlankAnswers: Object,
         multipleChoiceAnswer: Number,
         trueFalseAnswer: Boolean,
         question: {
             type: mongoose.Schema.Types.ObjectId, ref:'QuestionModel'
-        }
+        },
+        scored:Number
     }],
     score: Number,
-    total: Number
+    total: Number,
+    timeStamp: Number
 },{collection: 'submission'});

@@ -4,9 +4,6 @@ module.exports = app => {
 
 function createSubmission(req,res) {
 
-
-
-
     var value = calculateGrade(req.body);
 
     var grade = value[0];
@@ -14,19 +11,12 @@ function createSubmission(req,res) {
     var questions = value[2];
     var answers = value[3];
 
-
+    var timeStamp = Date.now();
 
     var studentId = req.session.currentUser._id;
     var quizId = req.body._id;
 
-
-
-    console.log(answers);
-
-
-
-
-    const submission = {student:studentId, quiz: quizId, score: grade, total: total,answers:answers};
+    const submission = {student:studentId, quiz: quizId, score: grade, total: total,answers:answers, timeStamp: timeStamp};
 
     subModel.createSubmission(submission)
         .then(() => {
@@ -34,6 +24,47 @@ function createSubmission(req,res) {
         });
 
 }
+
+function findAllSubmissionsForStudentForQuiz(req,res){
+
+    var studentId = req.session.currentUser._id;
+    var quizId = req.params.quizId;
+
+    subModel.findAllSubmissionsForStudentForQuiz(studentId,quizId)
+        .then((submissions) => res.send(submissions) );
+    }
+
+   function findSubmissionById(req,res){
+
+    var quizId = req.params.quizId;
+    var submissionId = req.params.submissionId;
+    var studentId = req.session.currentUser._id;
+
+    subModel.findSubmissionById(submissionId,quizId,studentId)
+        .then((submission) => res.send(submission));
+   }
+
+   function findAllSubmissionsForQuiz (req,res){
+
+    var quizId = req.params.quizId;
+
+    subModel.findAllSubmissionsForQuiz(quizId)
+        .then((submission) => res.send(submission));
+
+   }
+
+   function findAllSubmissions (req,res){
+    subModel.findAllSubmissions()
+        .then((submission) => res.send(submission));
+   }
+
+   function findAllSubmissionsForStudent(req,res){
+
+    var studentId = req.session.currentUser._id;
+
+    subModel.findAllSubmissionsForStudent(studentId)
+        .then((submission) => res.send(submission));
+   }
 
 
 
@@ -44,13 +75,13 @@ function createSubmission(req,res) {
 
 
     app.post('/api/quiz/:quizId/submission', createSubmission);
- //   app.get('/api/quiz/:quizId/submission', findAllSubmissionsForStudentForQuiz );
- //   app.get('/api/quiz/:quizId/submission/:submissionId' , findSubmissionById);
+    app.get('/api/quiz/:quizId/submission', findAllSubmissionsForStudentForQuiz );
+    app.get('/api/quiz/:quizId/submission/:submissionId' , findSubmissionById);
 
- //   app.get('/api/quiz/:quizId', findAllSubmissionsForQuiz);
- //   app.get('/api/submission' ,findAllSubmissions);
+    app.get('/api/quiz/:quizId/quizSubmissions', findAllSubmissionsForQuiz);
+    app.get('/api/submission' ,findAllSubmissions);
 
- //   app.get('/api/submission/student', findAllSubmissionsForStudent);
+    app.get('/api/submission/student', findAllSubmissionsForStudent);
 
 
 
@@ -76,12 +107,15 @@ function createSubmission(req,res) {
             switch(question.questionType)
             {
                 case 'ESSAY':
-                    if (question.essayAnswer.length === question.essayLength ) {
+                    var s1 = 0;
+                    if (question.essayAnswer.length >= question.essayLength ) {
                         grade += question.points;
-                        question.score = question.points;
+                        s1 = question.points;
 
                     }
-                    ans = {essayAnswer: question.essayAnswer, question: question._id};
+                    question.score = s1;
+                    console.log(question.score);
+                    ans = {essayAnswer: question.essayAnswer, question: question._id, scored: question.score};
 
 
                     break;
@@ -89,27 +123,32 @@ function createSubmission(req,res) {
                 case 'FILL_BLANKS':
 
                     var val = question.blanks.length/2;
+                    var s = 0;
                     for(let j =1; j<question.blanks.length;j=j+2)
                     {
                         var given = question.fillBlankAnswers[question.blanks[j].split(' ')[0].replace('*', '')];
-                        var ans1 = question.blanks[j].split(' ')[2];
+                        var ans1 = parseInt(question.blanks[j].split(' ')[2]);
 
-                        if( given=== ans1 )
+                        if( given === ans1 )
                         {
                             grade = grade + (question.points)/val;
-                            question.score += (question.points)/val;
+                            s += (question.points)/val;
+
+
 
                         }
+                        }
+                    question.score = s;
 
-                    }
 
-                     ans = {fillBlankAnswers:question.fillBlankAnswers, question: question._id}
+                     ans = {fillBlankAnswers:question.fillBlankAnswers, question: question._id, scored: question.score}
 
 
                     break;
 
                 case 'MULTIPLE_CHOICE':
                     let ans2;
+                    var s2 = 0;
                     for (let k =0; k<question.choices.length;k++)
                     {
                         if (question.choices[k].correct)
@@ -120,18 +159,22 @@ function createSubmission(req,res) {
 
                     if (ans2 === question.multipleChoiceAnswer) {
                         grade = grade + question.points;
-                        question.score = question.points;
+                        s2 = question.points;
                     }
-                    ans = {multipleChoiceAnswer:question.multipleChoiceAnswer, question:question._id}
+                    question.score = s2;
+                    console.log(question.score + 'MC');
+                    ans = {multipleChoiceAnswer:question.multipleChoiceAnswer, question:question._id, scored: question.score}
                     break;
 
                 case 'TRUE_FALSE':
+                    var s3 = 0;
                     if(question.true === question.trueFalseAnswer) {
                         grade += question.points;
-                        question.score = question.points;
+                        s3 = question.points;
                     }
-
-                    ans = {trueFalseAnswer: question.trueFalseAnswer, question: question._id}
+                        question.score = s3;
+                    console.log(question.score + 'TF')
+                    ans = {trueFalseAnswer: question.trueFalseAnswer, question: question._id, scored: question.score}
 
                     break;
                 default:
