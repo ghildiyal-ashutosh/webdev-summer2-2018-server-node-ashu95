@@ -5,13 +5,13 @@ var bodyParser = require('body-parser');
 
 
 const mongoose = require('mongoose');
-
-mongoose.connect('mongodb://heroku_9kz4wcwb:mg5iq7qrj3igaff8vpgo7eolr3@ds119052.mlab.com:19052/heroku_9kz4wcwb')
+mongoose.connect('mongodb://127.0.0.1/webdev2_summer2018')
+// mongoose.connect('mongodb://heroku_9kz4wcwb:mg5iq7qrj3igaff8vpgo7eolr3@ds119052.mlab.com:19052/heroku_9kz4wcwb')
 
 
 // cross origin call (CORS)
 app.use(function (req,res,next) {
-    res.header("Access-Control-Allow-Origin" , 'https://webdev2-angular-ashu95.herokuapp.com');
+    res.header("Access-Control-Allow-Origin" , 'http://localhost:4200');
     res.header("Access-Control-Allow-Credentials", "true");
     res.header("Access-Control-Allow-Headers", "Origin,X-Requested-With,Content-Type,Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
@@ -37,6 +37,10 @@ app.use(session({
 
 require('./services/user.service.server')(app);
 require('./services/section.service.server')(app);
+require('./services/quiz.service.server')(app);
+require('./services/question.service.server')(app);
+require('./services/submission.service.server')(app);
 
 
-app.listen(process.env.PORT || 3000)
+app.listen(3000);
+//app.listen(process.env.PORT || 3000)

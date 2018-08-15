@@ -110,8 +110,9 @@ module.exports = app => {
     app.delete('/api/section/:sectionId', deleteSection);
     app.put('/api/section/:sectionId', updateSection);
 
-    app.get('/api/course/:courseId/section', findSectionForCourse );
     app.get('/api/section/:sectionId', findSectionById);
+    app.get('/api/course/:courseId/section', findSectionForCourse );
+
 
     app.get('/api/findAllSections', findAllSections);
     app.put('/api/student/enroll/section/:sectionId', enrollSection);
